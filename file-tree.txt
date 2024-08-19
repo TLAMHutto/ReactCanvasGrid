@@ -1,0 +1,14 @@
+wiring-simulator/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Canvas.js
+│   │   ├── ToolBar.js
+│   │   └── CircuitElement.js
+│   ├── utils/
+│   │   └── drawingUtils.js
+│   ├── App.js
+│   ├── index.js
+│   ├── styles.css
+│   └── assets/
+└── package.json
