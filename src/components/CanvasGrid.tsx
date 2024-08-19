@@ -66,29 +66,46 @@ const CanvasGrid: React.FC = () => {
       ctx.fillRect(hoveredBox.column * columnWidth, hoveredBox.row * rowHeight, columnWidth, rowHeight);
     }
 
-    // Add event listener for mouse move
     const handleMouseMove = (e: MouseEvent) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const column = Math.floor(x / columnWidth);
-        const row = Math.floor(y / rowHeight);
-  
-        if (column >= 0 && column < numColumns && row >= 0 && row < numRows) {
-          const columnLabel = String.fromCharCode('A'.charCodeAt(0) + column); // Convert index to letter
-          const rowLabel = (row + 1).toString(); // Row numbers are 1-based
-          const boxLabel = `${columnLabel}${rowLabel}`;
-          
-          setHoveredBox({ column, row });
-          console.log(`Hovered Box: ${boxLabel}`); // Log the box label
-        }
-      };
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const column = Math.floor(x / columnWidth);
+      const row = Math.floor(y / rowHeight);
+
+      if (column >= 0 && column < numColumns && row >= 0 && row < numRows) {
+        const columnLabel = String.fromCharCode('A'.charCodeAt(0) + column); // Convert index to letter
+        const rowLabel = (row + 1).toString(); // Row numbers are 1-based
+        const boxLabel = `${columnLabel}${rowLabel}`;
+        
+        setHoveredBox({ column, row });
+        console.log(`Hovered Box: ${boxLabel}`); // Log the box label
+      }
+    };
+
+    const handleMouseClick = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const column = Math.floor(x / columnWidth);
+      const row = Math.floor(y / rowHeight);
+
+      if (column >= 0 && column < numColumns && row >= 0 && row < numRows) {
+        const columnLabel = String.fromCharCode('A'.charCodeAt(0) + column); // Convert index to letter
+        const rowLabel = (row + 1).toString(); // Row numbers are 1-based
+        const boxLabel = `${columnLabel}${rowLabel}`;
+        
+        console.log(`Clicked Box: ${boxLabel}`); // Log the box label on click
+      }
+    };
 
     canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('click', handleMouseClick);
 
     // Cleanup
     return () => {
       canvas.removeEventListener('mousemove', handleMouseMove);
+      canvas.removeEventListener('click', handleMouseClick);
     };
   }, [hoveredBox]);
 
@@ -96,4 +113,3 @@ const CanvasGrid: React.FC = () => {
 };
 
 export default CanvasGrid;
-
